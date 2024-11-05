@@ -9,6 +9,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "book")
@@ -16,12 +19,16 @@ public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @NotBlank(message = "Book's name is not blank")
     private String name;
     private String shortDesc;
     @Column(columnDefinition = "MEDIUMTEXT")
     private String detailDesc;
+    @DecimalMin(value = "0", inclusive = false, message = "Quantity must be greater than 0")
     private int quantity;
+    @DecimalMin(value = "0", inclusive = false, message = "Price must be greater than 0")
     private double price;
+    @DecimalMin(value = "0", inclusive = false, message = "Year of publication must be greater than 0")
     private int yearOfPublication;
     private String authorName;
     private String category;

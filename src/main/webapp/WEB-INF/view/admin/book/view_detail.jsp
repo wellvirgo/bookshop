@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>User detail ${user.getId()}</title>
+        <title>Book detail ${book.getId()}</title>
         <!--link to bootstrap-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
             integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -28,37 +28,42 @@
                         <div class="row">
                             <div class="col-8">
                                 <div class="d-flex justify-content-between align-items-end mb-2">
-                                    <h2 style="color: burlywood;">User ${user.getId()}</h2>
-                                    <div id="avatarContainer"
-                                        style="overflow: hidden; width: 100px; height: 100px; border-radius: 50%;">
-                                        <img alt="Avatar" style="width: auto; height: 100%;" id="avatar"
-                                            src="/images/avatars/${user.getAvatarLink()}" />
-                                    </div>
+                                    <h2 style="color: burlywood;">Book ${book.getId()}</h2>
                                 </div>
                                 <table class="table table-bordered">
                                     <tr class="table-info">
-                                        <td><strong>ID:</strong> ${user.getId()}</td>
+                                        <td><strong>ID:</strong> ${book.getId()}</td>
                                     </tr>
                                     <tr class="table-info">
-                                        <td><strong>Email:</strong> ${user.getEmail()}</td>
+                                        <td><strong>Name:</strong> ${book.getName()}</td>
                                     </tr>
                                     <tr class="table-info">
-                                        <td><strong>Password:</strong> ${user.getPassword()}</td>
+                                        <td><strong>Short description:</strong> ${book.getShortDesc()}</td>
                                     </tr>
                                     <tr class="table-info">
-                                        <td><strong>Full name:</strong> ${user.getFullName()}</td>
+                                        <td><strong>Detail description:</strong> ${book.getDetailDesc()}</td>
                                     </tr>
                                     <tr class="table-info">
-                                        <td><strong>Address:</strong> ${user.getAddress()}</td>
+                                        <td><strong>Quantity:</strong> ${book.getQuantity()}</td>
                                     </tr>
                                     <tr class="table-info">
-                                        <td><strong>Phone:</strong> ${user.getPhone()}</td>
+                                        <td><strong>Price:</strong> ${book.getPrice()}</td>
                                     </tr>
                                     <tr class="table-info">
-                                        <td><strong>Role:</strong> ${user.getRole().getRoleName()}</td>
+                                        <td><strong>Year of publication:</strong> ${book.getYearOfPublication()}</td>
+                                    </tr>
+                                    <tr class="table-info">
+                                        <td><strong>Author name:</strong> ${book.getAuthorName()}</td>
+                                    </tr>
+                                    <tr class="table-info">
+                                        <td><strong>Category:</strong> ${book.getCategory()}</td>
                                     </tr>
                                 </table>
-                                <a href="/admin/user" class="btn btn-dark mt-2">Back</a>
+                                <a href="/admin/book" class="btn btn-dark mt-2">Back</a>
+                            </div>
+                            <div class="col-4">
+                                <img alt="Book image" style="width: 250px; height: auto;" id="book"
+                                    src="/images/bookImages/${book.getImageLink()}" />
                             </div>
                         </div>
                     </div>

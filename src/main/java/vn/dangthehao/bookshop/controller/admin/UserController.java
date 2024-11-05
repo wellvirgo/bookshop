@@ -5,18 +5,28 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import vn.dangthehao.bookshop.domain.Role;
 import vn.dangthehao.bookshop.domain.User;
+import vn.dangthehao.bookshop.service.RoleService;
+import vn.dangthehao.bookshop.service.UploadFileService;
 import vn.dangthehao.bookshop.service.UserService;
 
 @Controller
 public class UserController {
     private final UserService userService;
+    private final RoleService roleService;
+    private final UploadFileService uploadFileService;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, RoleService roleService, UploadFileService uploadFileService) {
         this.userService = userService;
+        this.roleService = roleService;
+        this.uploadFileService = uploadFileService;
     }
 
     @GetMapping("/admin/user")
@@ -42,6 +52,45 @@ public class UserController {
     @PostMapping("/admin/user/delete/{id}")
     public String deleteUser(@PathVariable long id) {
         this.userService.deleteUserById(id);
+        return "redirect:/admin/user";
+    }
+
+    @GetMapping("/admin/user/update/{id}")
+    public String getUpdateUserPage(Model model, @PathVariable long id) {
+        User selectedUser = this.userService.fetchUserById(id);
+        model.addAttribute("user", selectedUser);
+        return "admin/user/update";
+    }
+
+    @PostMapping("/admin/user/update")
+    public String updateUser(@ModelAttribute(name = "user") User user) {
+        // set updated data
+        User updatedUser = this.userService.fetchUserById(user.getId());
+        updatedUser.setFullName(user.getFullName());
+        updatedUser.setAddress(user.getAddress());
+        updatedUser.setPhone(user.getPhone());
+        Role role = this.roleService.fetchRoleByRoleName(user.getRole().getRoleName());
+        updatedUser.setRole(role);
+
+        // update user into database
+        this.userService.saveUser(updatedUser);
+        return "redirect:/admin/user";
+    }
+
+    @GetMapping("/admin/user/create")
+    public String getUserCreationPage(Model model) {
+        model.addAttribute("newUser", new User());
+        return "admin/user/creation";
+    }
+
+    @PostMapping("/admin/user/create")
+    public String createUser(@ModelAttribute(name = "newUser") User user,
+            @RequestParam(name = "avatarFile") MultipartFile file) {
+        Role role = this.roleService.fetchRoleByRoleName(user.getRole().getRoleName());
+        user.setRole(role);
+        String avatarLink = this.uploadFileService.handleUploadFile(file, "avatars");
+        user.setAvatarLink(avatarLink);
+        this.userService.saveUser(user);
         return "redirect:/admin/user";
     }
 }
