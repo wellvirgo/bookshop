@@ -27,36 +27,6 @@ public class BookService {
         this.bookRepository.save(book);
     }
 
-    public String convertCategory(String categoryChoose) {
-        String category = "";
-        switch (categoryChoose) {
-            case "TRINH_THAM": {
-                category = "Trinh thám";
-                break;
-            }
-            case "TIEU_THUYET": {
-                category = "Tiểu thuyết";
-                break;
-            }
-            case "TRUYEN_NGAN": {
-                category = "Truyện ngắn";
-                break;
-            }
-            case "LICH_SU": {
-                category = "Lịch sử";
-                break;
-            }
-            case "KH_VT": {
-                category = "Khoa học-viễn tưởng";
-                break;
-            }
-
-            default:
-                break;
-        }
-        return category;
-    }
-
     public void deleteBookById(long id) {
         this.bookRepository.deleteById(id);
     }

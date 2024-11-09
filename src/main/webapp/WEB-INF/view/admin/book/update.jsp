@@ -78,11 +78,12 @@
                                             <div class="mb-3 col-6">
                                                 <label for="category" class="form-label label">Category</label>
                                                 <form:select class="form-select" path="category" id="category">
-                                                    <form:option value="TRINH_THAM">Trinh thám</form:option>
-                                                    <form:option value="TIEU_THUYET">Tiểu thuyết</form:option>
-                                                    <form:option value="TRUYEN_NGAN">Truyện ngắn</form:option>
-                                                    <form:option value="LICH_SU">Lịch sử</form:option>
-                                                    <form:option value="KH_VT">Khoa học-viễn tưởng</form:option>
+                                                    <form:option value="TRINH_THAM">TRINH_THAM</form:option>
+                                                    <form:option value="TIEU_THUYET">TIEU_THUYET</form:option>
+                                                    <form:option value="TRUYEN_NGAN">TRUYEN_NGAN</form:option>
+                                                    <form:option value="LICH_SU">LICH_SU</form:option>
+                                                    <form:option value="KHOA-HOC_VIEN-TUONG">KHOA-HOC_VIEN-TUONG
+                                                    </form:option>
                                                 </form:select>
                                             </div>
                                         </div>

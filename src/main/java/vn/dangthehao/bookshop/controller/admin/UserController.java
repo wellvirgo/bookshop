@@ -2,6 +2,7 @@ package vn.dangthehao.bookshop.controller.admin;
 
 import java.util.List;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,11 +23,15 @@ public class UserController {
     private final UserService userService;
     private final RoleService roleService;
     private final UploadFileService uploadFileService;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserController(UserService userService, RoleService roleService, UploadFileService uploadFileService) {
+    public UserController(UserService userService, RoleService roleService,
+            UploadFileService uploadFileService,
+            PasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.roleService = roleService;
         this.uploadFileService = uploadFileService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping("/admin/user")
@@ -44,14 +49,16 @@ public class UserController {
     }
 
     @GetMapping("/admin/user/delete/{id}")
-    public String getUserDeletionPage(Model model, @PathVariable long id) {
+    public String getUserDeletionPage(Model model, @PathVariable long id, @ModelAttribute User currentUser) {
+        currentUser = this.userService.fetchUserById(id);
+        model.addAttribute("currentUser", currentUser);
         model.addAttribute("userId", id);
         return "admin/user/deletion";
     }
 
-    @PostMapping("/admin/user/delete/{id}")
-    public String deleteUser(@PathVariable long id) {
-        this.userService.deleteUserById(id);
+    @PostMapping("/admin/user/delete")
+    public String deleteUser(@ModelAttribute(name = "currentUser") User currentUser) {
+        this.userService.deleteUserById(currentUser.getId());
         return "redirect:/admin/user";
     }
 
@@ -88,8 +95,12 @@ public class UserController {
             @RequestParam(name = "avatarFile") MultipartFile file) {
         Role role = this.roleService.fetchRoleByRoleName(user.getRole().getRoleName());
         user.setRole(role);
-        String avatarLink = this.uploadFileService.handleUploadFile(file, "avatars");
-        user.setAvatarLink(avatarLink);
+        if (!file.isEmpty()) {
+            String avatarLink = this.uploadFileService.handleUploadFile(file, "avatars");
+            user.setAvatarLink(avatarLink);
+        }
+        String hashPassword = this.passwordEncoder.encode(user.getPassword());
+        user.setPassword(hashPassword);
         this.userService.saveUser(user);
         return "redirect:/admin/user";
     }

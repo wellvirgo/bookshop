@@ -1,2 +1,3 @@
 1. spring.jpa.open-in-view
 2. scale image
+3. optimize fetch book home page 

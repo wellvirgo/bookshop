@@ -59,9 +59,7 @@ public class BookController {
         }
         // if do not have error, create new book
         String imageLink = this.uploadFileService.handleUploadFile(file, "bookImages");
-        String categoryChoose = newBook.getCategory();
         newBook.setImageLink(imageLink);
-        newBook.setCategory(this.bookService.convertCategory(categoryChoose));
         this.bookService.saveBook(newBook);
         return "redirect:/admin/book";
     }
@@ -80,12 +78,20 @@ public class BookController {
         if (!errors.isEmpty()) {
             return "admin/book/update";
         }
-        String imageLink = this.uploadFileService.handleUploadFile(file, "bookImages");
-        String categoryChoose = selectedBook.getCategory();
-        String category = this.bookService.convertCategory(categoryChoose);
-        selectedBook.setImageLink(imageLink);
-        selectedBook.setCategory(category);
-        this.bookService.saveBook(selectedBook);
+        Book updateBook = this.bookService.fetchBookById(selectedBook.getId());
+        if (!file.isEmpty()) {
+            String imgLink = this.uploadFileService.handleUploadFile(file, "bookImages");
+            updateBook.setImageLink(imgLink);
+        }
+        updateBook.setName(selectedBook.getName());
+        updateBook.setShortDesc(selectedBook.getShortDesc());
+        updateBook.setDetailDesc(selectedBook.getDetailDesc());
+        updateBook.setQuantity(selectedBook.getQuantity());
+        updateBook.setPrice(selectedBook.getPrice());
+        updateBook.setYearOfPublication(selectedBook.getYearOfPublication());
+        updateBook.setAuthorName(selectedBook.getAuthorName());
+        updateBook.setCategory(selectedBook.getCategory());
+        this.bookService.saveBook(updateBook);
         return "redirect:/admin/book";
     }
 
