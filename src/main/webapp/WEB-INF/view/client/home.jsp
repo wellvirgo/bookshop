@@ -130,9 +130,13 @@
                                                             <img src="/images/bookImages/${book.getImageLink()}"
                                                                 alt="Books" class="product-item">
                                                         </a>
-                                                        <button type="button" class="add-to-cart"
-                                                            data-product-tile="add-to-cart">Add to
-                                                            Cart</button>
+                                                        <form method="post" action="/add-book-to-cart/${book.getId()}">
+                                                            <input type="hidden" name="${_csrf.parameterName}"
+                                                                value="${_csrf.token}" />
+                                                            <button type="submit" class="add-to-cart"
+                                                                data-product-tile="add-to-cart">Add to
+                                                                Cart</button>
+                                                        </form>
                                                     </figure>
                                                     <figcaption>
                                                         <h3>

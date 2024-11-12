@@ -5,7 +5,7 @@
             <html lang="en">
 
             <head>
-                <title>BookSaw - Free Book Store HTML CSS Template</title>
+                <title>Book shop</title>
                 <meta charset="utf-8">
                 <meta http-equiv="X-UA-Compatible" content="IE=edge">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -62,7 +62,8 @@
                                     <div class="d-flex gap-3">
                                         <input type="number" name="age" id="age" class="m-0 text-center" min="1"
                                             max="12" step="1" value="1">
-                                        <button type="submit" name="add-to-cart" value="27545" class="button m-0">Add to
+                                        <button type="submit" name="add-to-cart" value="27545" class="button m-0"
+                                            style="background-color: #daa556;">Add to
                                             cart</button>
                                     </div>
 

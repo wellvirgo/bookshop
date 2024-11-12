@@ -37,10 +37,10 @@
                                 </div>
                             </div>
                             <c:if test="${empty pageContext.request.userPrincipal}">
-                                <a href="/login">Login</a>
+                                <a href="/login" style="margin-left: 10px;"><strong>Login</strong></a>
                             </c:if>
                             <c:if test="${not empty pageContext.request.userPrincipal}">
-                                <a href="#" class="cart for-buy"><i class="icon icon-clipboard"></i>
+                                <a href="/cart" class="cart for-buy"><i class="icon icon-clipboard"></i>
                                     <span>Cart(${sessionScope.sumInCart})</span></a>
                                 <button class="dropdown-toggle btn" type="button" data-bs-toggle="dropdown"
                                     aria-expanded="false">
@@ -71,7 +71,7 @@
         </div>
     </div><!--top-content-->
 
-    <header id="header">
+    <header id="header-wrap">
         <div class="container-fluid">
             <div class="row">
 
@@ -133,5 +133,3 @@
             </div>
         </div>
     </header>
-
-    </div><!--header-wrap-->
