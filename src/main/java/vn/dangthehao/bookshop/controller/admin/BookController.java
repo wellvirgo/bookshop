@@ -1,7 +1,11 @@
 package vn.dangthehao.bookshop.controller.admin;
 
 import java.util.List;
+import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -29,9 +33,17 @@ public class BookController {
     }
 
     @GetMapping("/admin/book")
-    public String getProductDashboard(Model model) {
-        List<Book> books = this.bookService.fetchBooks();
+    public String getProductDashboard(Model model, @RequestParam("page") Optional<String> pageOptional) {
+        int currentPage = 1;
+        if (pageOptional.isPresent()) {
+            currentPage = Integer.parseInt(pageOptional.get());
+        }
+        Pageable pageable = PageRequest.of(currentPage - 1, 5);
+        Page<Book> bookPagination = this.bookService.fetchBooksWithPagination(pageable);
+        List<Book> books = bookPagination.getContent();
         model.addAttribute("books", books);
+        model.addAttribute("totalPages", bookPagination.getTotalPages());
+        model.addAttribute("currentPage", currentPage);
         return "admin/book/show";
     }
 

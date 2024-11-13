@@ -2,6 +2,8 @@ package vn.dangthehao.bookshop.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import vn.dangthehao.bookshop.domain.Role;
@@ -22,6 +24,10 @@ public class UserService {
 
     public List<User> fetchUsers() {
         return this.userRepository.findAll();
+    }
+
+    public Page<User> fetchUsersWithPagination(Pageable pageable) {
+        return this.userRepository.findAll(pageable);
     }
 
     public User fetchUserById(long id) {

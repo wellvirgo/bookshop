@@ -96,14 +96,35 @@
                                                     </div>
                                                 </div>
                                             </c:forEach>
-
+                                            <nav aria-label="Page navigation example" class="mt-5">
+                                                <ul class="pagination justify-content-center">
+                                                    <li class="page-item ${currentPage eq 1 ? 'disabled' : ''}">
+                                                        <a class="page-link" href="/books?page=${currentPage-1}"
+                                                            aria-label="Previous">
+                                                            <span aria-hidden="true">&laquo;</span>
+                                                        </a>
+                                                    </li>
+                                                    <c:forEach begin="1" end="${totalPages}" varStatus="status">
+                                                        <li
+                                                            class="page-item ${currentPage eq status.index ? 'active' : ''}">
+                                                            <a class="page-link"
+                                                                href="/books?page=${status.index}">${status.index}</a>
+                                                        </li>
+                                                    </c:forEach>
+                                                    <li
+                                                        class="page-item ${currentPage eq totalPages ? 'disabled' : ''}">
+                                                        <a class="page-link" href="/books?page=${currentPage+1}"
+                                                            aria-label="Next">
+                                                            <span aria-hidden="true">&raquo;</span>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </nav>
                                         </div><!--ft-books-slider-->
                                     </div><!--grid-->
 
-
                                 </div><!--inner-content-->
                             </div>
-
                         </div>
                     </section>
 

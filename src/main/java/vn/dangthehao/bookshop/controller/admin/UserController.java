@@ -1,7 +1,11 @@
 package vn.dangthehao.bookshop.controller.admin;
 
 import java.util.List;
+import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,9 +39,17 @@ public class UserController {
     }
 
     @GetMapping("/admin/user")
-    public String getUserDashboard(Model model) {
-        List<User> users = this.userService.fetchUsers();
+    public String getUserDashboard(Model model, @RequestParam("page") Optional<String> pageOptional) {
+        int currentPage = 1;
+        if (pageOptional.isPresent()) {
+            currentPage = Integer.parseInt(pageOptional.get());
+        }
+        Pageable pageable = PageRequest.of(currentPage - 1, 10);
+        Page<User> userPagination = this.userService.fetchUsersWithPagination(pageable);
+        List<User> users = userPagination.getContent();
         model.addAttribute("users", users);
+        model.addAttribute("totalPages", userPagination.getTotalPages());
+        model.addAttribute("currentPage", currentPage);
         return "admin/user/show";
     }
 
