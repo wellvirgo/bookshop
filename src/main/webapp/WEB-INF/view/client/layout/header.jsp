@@ -48,7 +48,7 @@
                                 </button>
                                 <ul class="dropdown-menu" style="background-color: #efe3a1;">
                                     <li><a href="#" class="dropdown-item">Account management</a></li>
-                                    <li><a href="#" class="dropdown-item">Purchase history</a></li>
+                                    <li><a href="/purchase-history" class="dropdown-item">Purchase history</a></li>
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
@@ -91,32 +91,18 @@
                             <ul class="menu-list">
                                 <li class="menu-item active"><a href="/">Home</a></li>
                                 <li class="menu-item has-sub">
-                                    <a href="#pages" class="nav-link">Pages</a>
+                                    <a href="#pages" class="nav-link">Category</a>
 
                                     <ul>
-                                        <li class="active"><a href="index.html">Home</a></li>
-                                        <li><a href="about.html">About <span class="badge bg-dark">PRO</span></a>
-                                        </li>
-                                        <li><a href="styles.html">Styles <span class="badge bg-dark">PRO</span></a>
-                                        </li>
-                                        <li><a href="blog.html">Blog <span class="badge bg-dark">PRO</span></a></li>
-                                        <li><a href="single-post.html">Post Single <span
-                                                    class="badge bg-dark">PRO</span></a></li>
-                                        <li><a href="shop.html">Our Store <span class="badge bg-dark">PRO</span></a>
-                                        </li>
-                                        <li><a href="single-product.html">Product Single <span
-                                                    class="badge bg-dark">PRO</span></a></li>
-                                        <li><a href="contact.html">Contact <span class="badge bg-dark">PRO</span></a>
-                                        </li>
-                                        <li><a href="thank-you.html">Thank You <span
-                                                    class="badge bg-dark">PRO</span></a>
-                                        </li>
+                                        <li><a href="index.html">Novel</a></li>
+                                        <li><a href="index.html">History</a></li>
+                                        <li><a href="index.html">Detective</a></li>
+                                        <li><a href="index.html">Science fiction</a></li>
+                                        <li><a href="index.html">Short story</a></li>
                                     </ul>
 
                                 </li>
                                 <li class="menu-item"><a href="/books" class="nav-link">Books</a></li>
-                                <li class="menu-item"><a href="#popular-books" class="nav-link">Category</a>
-                                </li>
                             </ul>
 
                             <div class="hamburger">

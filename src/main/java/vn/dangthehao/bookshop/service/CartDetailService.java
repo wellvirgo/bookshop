@@ -23,4 +23,8 @@ public class CartDetailService {
     public CartDetail saveCartDetail(CartDetail cartDetail) {
         return this.cartDetailRepository.save(cartDetail);
     }
+
+    public void deleteCartDetail(CartDetail cartDetail) {
+        this.cartDetailRepository.delete(cartDetail);
+    }
 }

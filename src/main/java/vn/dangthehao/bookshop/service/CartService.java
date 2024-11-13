@@ -92,20 +92,24 @@ public class CartService {
         }
     }
 
-    public void handleUpdateCartBeforeCheckOut(List<CartDetail> newCartDetails, Cart cart) {
-        double newTotalOfCart = 0;
-        for (CartDetail newCartDetail : newCartDetails) {
-            Optional<CartDetail> oldCartDetail = this.cartDetailRepository.findById(newCartDetail.getId());
+    public void handleUpdateCartBeforeCheckOut(List<CartDetail> updatedCartDetails, Cart cart) {
+        double updatedTotalOfCart = 0;
+        for (CartDetail updatedCartDetail : updatedCartDetails) {
+            Optional<CartDetail> oldCartDetail = this.cartDetailRepository.findById(updatedCartDetail.getId());
             if (oldCartDetail.isPresent()) {
                 // Update cartDetail
-                oldCartDetail.get().setQuantity(newCartDetail.getQuantity());
-                oldCartDetail.get().setTotal(newCartDetail.getTotal());
+                oldCartDetail.get().setQuantity(updatedCartDetail.getQuantity());
+                oldCartDetail.get().setTotal(updatedCartDetail.getTotal());
                 this.cartDetailRepository.save(oldCartDetail.get());
                 // Update total of cart
-                newTotalOfCart += newCartDetail.getTotal();
-                cart.setTotal(newTotalOfCart);
+                updatedTotalOfCart += updatedCartDetail.getTotal();
+                cart.setTotal(updatedTotalOfCart);
             }
         }
         this.cartRepository.save(cart);
+    }
+
+    public void deleteCart(Cart cart) {
+        this.cartRepository.delete(cart);
     }
 }
