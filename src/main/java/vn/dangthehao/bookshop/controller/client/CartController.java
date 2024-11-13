@@ -18,6 +18,7 @@ import vn.dangthehao.bookshop.domain.CartDetail;
 import vn.dangthehao.bookshop.domain.User;
 import vn.dangthehao.bookshop.service.CartDetailService;
 import vn.dangthehao.bookshop.service.CartService;
+import vn.dangthehao.bookshop.service.EmailService;
 import vn.dangthehao.bookshop.service.OrderService;
 import vn.dangthehao.bookshop.service.UserService;
 
@@ -27,13 +28,16 @@ public class CartController {
     private final UserService userService;
     private final CartDetailService cartDetailService;
     private final OrderService orderService;
+    private final EmailService emailService;
 
     public CartController(CartService cartService, UserService userService,
-            CartDetailService cartDetailService, OrderService orderService) {
+            CartDetailService cartDetailService, OrderService orderService,
+            EmailService emailService) {
         this.cartService = cartService;
         this.userService = userService;
         this.cartDetailService = cartDetailService;
         this.orderService = orderService;
+        this.emailService = emailService;
     }
 
     @PostMapping("/add-book-to-cart/{bookId}")
@@ -87,8 +91,11 @@ public class CartController {
             @RequestParam(name = "receiver_address") String receiverAddress,
             @RequestParam(name = "receiver_phone") String receiverPhone) {
         HttpSession session = request.getSession(false);
-        User user = this.userService.fetchUserByEmail(session.getAttribute("email") + "");
+        String email = session.getAttribute("email") + "";
+        User user = this.userService.fetchUserByEmail(email);
         this.orderService.createOrder(user, receiverName, receiverAddress, receiverPhone, session);
+        String thankMessage = "Thank for your support. Have a good day!";
+        this.emailService.sendThankMessage(email, "Thank email", thankMessage);
         return "client/cart/thank";
     }
 }

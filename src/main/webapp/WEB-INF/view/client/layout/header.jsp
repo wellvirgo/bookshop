@@ -47,7 +47,7 @@
                                     <i class="icon icon-user"></i>
                                 </button>
                                 <ul class="dropdown-menu" style="background-color: #efe3a1;">
-                                    <li><a href="#" class="dropdown-item">Account management</a></li>
+                                    <li><a href="/account" class="dropdown-item">Account management</a></li>
                                     <li><a href="/purchase-history" class="dropdown-item">Purchase history</a></li>
                                     <li>
                                         <hr class="dropdown-divider">

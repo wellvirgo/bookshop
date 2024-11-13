@@ -55,11 +55,22 @@
                     </div>
 
                     <c:if test="${cart==null}">
-                        <div>
+                        <div class="container">
                             <h5 style="text-align: center; border-bottom: 1px solid #E0E0E0; padding: 20px;">
                                 Buy a book to create your cart.
                             </h5>
+                            <div class="row">
+                                <div class="col-md-12">
+
+                                    <div class="btn-wrap align-right">
+                                        <a href="/books" class="btn-accent-arrow">View all products <i
+                                                class="icon icon-ns-arrow-right"></i></a>
+                                    </div>
+
+                                </div>
+                            </div>
                         </div>
+
                     </c:if>
 
                     <c:if test="${cart!=null}">
