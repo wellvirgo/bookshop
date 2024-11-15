@@ -1,4 +1,4 @@
-(function($) {
+(function ($) {
 
   "use strict";
 
@@ -27,8 +27,8 @@
   hamburger.addEventListener("click", mobileMenu);
 
   function mobileMenu() {
-      hamburger.classList.toggle("active");
-      navMenu.classList.toggle("responsive");
+    hamburger.classList.toggle("active");
+    navMenu.classList.toggle("responsive");
   }
 
   const navLink = document.querySelectorAll(".nav-link");
@@ -36,33 +36,33 @@
   navLink.forEach(n => n.addEventListener("click", closeMenu));
 
   function closeMenu() {
-      hamburger.classList.remove("active");
-      navMenu.classList.remove("responsive");
+    hamburger.classList.remove("active");
+    navMenu.classList.remove("responsive");
   }
 
-  var initScrollNav = function() {
+  var initScrollNav = function () {
     var scroll = $(window).scrollTop();
 
     if (scroll >= 200) {
       $('#header').addClass("fixed-top");
-    }else{
+    } else {
       $('#header').removeClass("fixed-top");
     }
   }
 
-  $(window).scroll(function() {    
+  $(window).scroll(function () {
     initScrollNav();
-  }); 
+  });
 
-  $(document).ready(function(){
+  $(document).ready(function () {
     initScrollNav();
-    
+
     Chocolat(document.querySelectorAll('.image-link'), {
-        imageSize: 'contain',
-        loop: true,
+      imageSize: 'contain',
+      loop: true,
     })
 
-    $('#header-wrap').on('click', '.search-toggle', function(e) {
+    $('#header-wrap').on('click', '.search-toggle', function (e) {
       var selector = $(this).data('selector');
 
       $(selector).toggleClass('show').find('.search-input').focus();
@@ -73,7 +73,7 @@
 
 
     // close when click off of container
-    $(document).on('click touchstart', function (e){
+    $(document).on('click touchstart', function (e) {
       if (!$(e.target).is('.search-toggle, .search-toggle *, #header-wrap, #header-wrap *')) {
         $('.search-toggle').removeClass('active');
         $('#header-wrap').removeClass('show');
@@ -81,47 +81,47 @@
     });
 
     $('.main-slider').slick({
-        autoplay: false,
-        autoplaySpeed: 4000,
-        fade: true,
-        dots: true,
-        prevArrow: $('.prev'),
-        nextArrow: $('.next'),
-    }); 
+      autoplay: false,
+      autoplaySpeed: 4000,
+      fade: true,
+      dots: true,
+      prevArrow: $('.prev'),
+      nextArrow: $('.next'),
+    });
 
     $('.product-grid').slick({
-        slidesToShow: 4,
-        slidesToScroll: 1,
-        autoplay: false,
-        autoplaySpeed: 2000,
-        dots: true,
-        arrows: false,
-        responsive: [
-          {
-            breakpoint: 1400,
-            settings: {
-              slidesToShow: 3,
-              slidesToScroll: 1
-            }
-          },
-          {
-            breakpoint: 999,
-            settings: {
-              slidesToShow: 2,
-              slidesToScroll: 1
-            }
-          },
-          {
-            breakpoint: 660,
-            settings: {
-              slidesToShow: 1,
-              slidesToScroll: 1
-            }
+      slidesToShow: 4,
+      slidesToScroll: 1,
+      autoplay: false,
+      autoplaySpeed: 2000,
+      dots: true,
+      arrows: false,
+      responsive: [
+        {
+          breakpoint: 1400,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 1
           }
-          // You can unslick at a given breakpoint now by adding:
-          // settings: "unslick"
-          // instead of a settings object
-        ]
+        },
+        {
+          breakpoint: 999,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 1
+          }
+        },
+        {
+          breakpoint: 660,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1
+          }
+        }
+        // You can unslick at a given breakpoint now by adding:
+        // settings: "unslick"
+        // instead of a settings object
+      ]
     });
 
     AOS.init({
@@ -137,5 +137,83 @@
 
   }); // End of a document
 
+  // Filter
+  $('#btnFilter').click(function (event) {
+    event.preventDefault;
+    let categoryArr = [];
+    let yOPArr = [];
+    let priceArr = [];
+
+    // Category filter
+    $('#categoryFilter .form-check-input:checked').each(function () {
+      categoryArr.push($(this).val());
+    });
+
+    // Yop filter
+    $('#yOPFilter .form-check-input:checked').each(function () {
+      yOPArr.push($(this).val())
+    });
+
+    // Price filter
+    $('#priceFilter .form-check-input:checked').each(function () {
+      priceArr.push($(this).val())
+    });
+
+    // Sort filter
+    let sortValue = $('input[name="sorting"]:checked').val();
+
+    // Update URL when click btn filter
+    let currentUrl = new URL(window.location.href);
+    let searchParams = currentUrl.searchParams;
+
+    searchParams.delete('category');
+    searchParams.delete('yearOfPublication');
+    searchParams.delete('price');
+
+    searchParams.set('page', 1);
+    searchParams.set('sort', sortValue);
+    if (categoryArr.length > 0) {
+      searchParams.set('category', categoryArr.join(','));
+    }
+    if (yOPArr.length > 0) {
+      searchParams.set('yearOfPublication', yOPArr.join(','));
+    }
+    if (priceArr.length > 0) {
+      searchParams.set('price', priceArr.join(','));
+    }
+
+
+    window.location.href = currentUrl.toString();
+  });
+
+  // Set check box, radio after change url
+  const params = new URLSearchParams(window.location.search);
+
+  // Set check box of category
+  if (params.has('category')) {
+    const categories = params.get('category').split(',');
+    categories.forEach(category => {
+      $(`#categoryFilter .form-check-input[value="${category}"]`).prop('checked', true);
+    });
+  }
+  // Set check box of yop
+  if (params.has('yearOfPublication')) {
+    const yOPS = params.get('yearOfPublication').split(',');
+    yOPS.forEach(yOP => {
+      $(`#yOPFilter .form-check-input[value="${yOP}"]`).prop('checked', true);
+    });
+  }
+  // Set check box of price
+  if (params.has('price')) {
+    const prices = params.get('price').split(',');
+    prices.forEach(price => {
+      $(`#priceFilter .form-check-input[value="${price}"]`).prop('checked', true);
+    });
+  }
+  // Set radio for sorting
+  if (params.has('sort')) {
+    const sortValue = params.get('sort')
+    $(`input[name="sorting"][value="${sortValue}"]`).prop('checked', true);
+  }
 
 })(jQuery);

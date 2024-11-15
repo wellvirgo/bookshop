@@ -62,4 +62,8 @@ public class UserService {
     public Role getRoleByName(String roleName) {
         return this.roleRepository.findByRoleName(roleName);
     }
+
+    public long countUsers() {
+        return this.userRepository.count();
+    }
 }

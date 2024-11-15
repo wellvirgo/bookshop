@@ -44,8 +44,15 @@ public class CartController {
     public String addBookToCart(@ModelAttribute(name = "book") Book book, HttpServletRequest request,
             @PathVariable long bookId) {
         HttpSession session = request.getSession(false);
-
         this.cartService.addBookToCart(bookId, session, 1);
+        return "redirect:/books";
+    }
+
+    @PostMapping("/add-book-to-cart-form-view-detail/{bookId}")
+    public String addBookToCartFromViewDetail(@PathVariable long bookId, HttpServletRequest request,
+            @RequestParam(name = "quantity") int quantity) {
+        HttpSession session = request.getSession(false);
+        this.cartService.addBookToCart(bookId, session, quantity);
         return "redirect:/books";
     }
 

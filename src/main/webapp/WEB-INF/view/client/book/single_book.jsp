@@ -60,11 +60,15 @@
                                     </p>
 
                                     <div class="d-flex gap-3">
-                                        <input type="number" name="age" id="age" class="m-0 text-center" min="1"
-                                            max="12" step="1" value="1">
-                                        <button type="submit" name="add-to-cart" value="27545" class="button m-0"
-                                            style="background-color: #daa556;">Add to
-                                            cart</button>
+                                        <form method="post" action="/add-book-to-cart-form-view-detail/${book.getId()}"
+                                            modelAttribute="book">
+                                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                                            <input type="number" name="quantity" id="age" class="m-0 text-center"
+                                                min="1" step="1" value="1" style="width: 8ch;">
+                                            <button type="submit" name="add-to-cart" value="27545" class="button m-0"
+                                                style="background-color: #daa556;">Add to
+                                                cart</button>
+                                            </form:input>
                                     </div>
 
                                 </div>

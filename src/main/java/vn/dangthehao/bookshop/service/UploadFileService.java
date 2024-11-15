@@ -30,10 +30,10 @@ public class UploadFileService {
             if (!dir.exists()) {
                 dir.mkdir();
             }
-            // create file to save
+            // Create file to save
             finalFileName = System.currentTimeMillis() + "-" + file.getOriginalFilename();
             File serverFile = new File(dir.getAbsolutePath() + File.separator + finalFileName);
-            // save file into created file
+            // Save file into created file
             BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(
                     new FileOutputStream(serverFile));
             bufferedOutputStream.write(fileToBytes);

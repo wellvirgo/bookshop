@@ -102,7 +102,7 @@
                                                     <input type="number" class="fixed-width-input"
                                                         id="quantity${cartDetail.getId()}"
                                                         value="${cartDetail.getQuantity()}"
-                                                        onchange="changeQuantity('${cartDetail.getId()}')">
+                                                        onchange="changeQuantity('${cartDetail.getId()}')" min="1">
                                                 </td>
                                                 <td>
                                                     <span id="price${cartDetail.getId()}">

@@ -14,15 +14,22 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import jakarta.servlet.ServletContext;
 import vn.dangthehao.bookshop.domain.Order;
+import vn.dangthehao.bookshop.service.ExportPDFService;
 import vn.dangthehao.bookshop.service.OrderService;
 
 @Controller
 public class AdminOrderController {
-    private OrderService orderService;
+    private final OrderService orderService;
+    private final ExportPDFService exportPDFService;
+    private final ServletContext servletContext;
 
-    public AdminOrderController(OrderService orderService) {
+    public AdminOrderController(OrderService orderService, ExportPDFService exportPDFService,
+            ServletContext servletContext) {
         this.orderService = orderService;
+        this.exportPDFService = exportPDFService;
+        this.servletContext = servletContext;
     }
 
     @GetMapping("/admin/order")
@@ -64,6 +71,19 @@ public class AdminOrderController {
         if (oldOrder.isPresent()) {
             oldOrder.get().setStatus(updateOrder.getStatus());
             this.orderService.saveOrder(oldOrder.get());
+        }
+        return "redirect:/admin/order";
+    }
+
+    @PostMapping("/admin/export-pdf/{id}")
+    public String exportDataToPDF(@PathVariable("id") long id) {
+        Optional<Order> orderOptional = this.orderService.fetchOrderById(id);
+        if (orderOptional.isPresent()) {
+            Order order = orderOptional.get();
+            String documentPath = this.servletContext.getRealPath("/resources/pdf/infoOfOrder_") + order.getId()
+                    + ".pdf";
+            this.exportPDFService.exportDataToPDF(documentPath, order);
+            return "redirect:/admin/order/view-detail/" + order.getId();
         }
         return "redirect:/admin/order";
     }

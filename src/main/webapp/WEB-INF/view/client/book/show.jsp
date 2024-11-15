@@ -28,29 +28,125 @@
 
                 </head>
 
-                <body data-bs-spy="scroll" data-bs-target="#header" tabindex="0">
+                <body data-bs-spy="scroll" data-bs-target="#header" tabindex="0" class="row">
 
                     <jsp:include page="../layout/header.jsp" />
 
-                    <section id="client-holder" data-aos="fade-up">
+                    <section id="client-holder" data-aos="fade-up"
+                        style="padding: 0px !important; width: 20%; height: 50%;">
                         <div class="container">
                             <div class="row">
                                 <div class="inner-content">
-                                    <div class="logo-wrap">
-                                        <div class="grid">
-                                            <a href="#"><img src="/client/images/client-image1.png" alt="client"></a>
-                                            <a href="#"><img src="/client/images/client-image2.png" alt="client"></a>
-                                            <a href="#"><img src="/client/images/client-image3.png" alt="client"></a>
-                                            <a href="#"><img src="/client/images/client-image4.png" alt="client"></a>
-                                            <a href="#"><img src="/client/images/client-image5.png" alt="client"></a>
+
+                                    <div class="row mb-2">
+                                        <div class="col-12">
+                                            <h3>Category</h3>
+                                            <div id="categoryFilter">
+                                                <div class="form-check form-check-inline">
+                                                    <input id="TRINH_THAM" type="checkbox" value="TRINH_THAM"
+                                                        class="form-check-input">
+                                                    <label for="TRINH_THAM" class="form-check-label">TRINH_THAM</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input id="TRUYEN_NGAN" type="checkbox" value="TRUYEN_NGAN"
+                                                        class="form-check-input">
+                                                    <label for="TRUYEN_NGAN"
+                                                        class="form-check-label">TRUYEN_NGAN</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input id="LICH_SU" type="checkbox" value="LICH_SU"
+                                                        class="form-check-input">
+                                                    <label for="LICH_SU" class="form-check-label">LICH_SU</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input id="KHOA-HOC_VIEN-TUONG" type="checkbox"
+                                                        value="KHOA-HOC_VIEN-TUONG" class="form-check-input">
+                                                    <label for="KHOA-HOC_VIEN-TUONG"
+                                                        class="form-check-label">KHOA-HOC_VIEN-TUONG</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input id="TIEU_THUYET" type="checkbox" value="TIEU_THUYET"
+                                                        class="form-check-input">
+                                                    <label for="TIEU_THUYET"
+                                                        class="form-check-label">TIEU_THUYET</label>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div><!--image-holder-->
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-12">
+                                            <h3>Year of publication</h3>
+                                            <div id="yOPFilter">
+                                                <div class="form-check form-check-inline">
+                                                    <input id="bf2000" type="checkbox" value="truoc-2000"
+                                                        class="form-check-input">
+                                                    <label for="bf2000" class="form-check-label">Before 2000</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input id="af2000" type="checkbox" value="sau-2000"
+                                                        class="form-check-input">
+                                                    <label for="af2000" class="form-check-label">After 2000</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-12">
+                                            <h3>Price</h3>
+                                            <div id="priceFilter">
+                                                <div class="form-check form-check-inline">
+                                                    <input id="lt50" type="checkbox" value="duoi-50k"
+                                                        class="form-check-input">
+                                                    <label for="lt50" class="form-check-label">Less than 50K</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input id="50to100" type="checkbox" value="tu50k-toi100k"
+                                                        class="form-check-input">
+                                                    <label for="50to100" class="form-check-label">50K to 100K</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input id="gt100" type="checkbox" value="tren-100k"
+                                                        class="form-check-input">
+                                                    <label for="gt100" class="form-check-label">Greater than
+                                                        100K</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-12">
+                                            <h3>Sort by price</h3>
+                                            <div class="form-check form-check-inline">
+                                                <input id="noSorting" type="radio" value="noSorting"
+                                                    class="form-check-input" name="sorting" checked>
+                                                <label for="noSorting" class="form-check-label">No sorting</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input id="priceAsc" type="radio" value="priceAsc"
+                                                    class="form-check-input" name="sorting">
+                                                <label for="priceAsc" class="form-check-label">Price
+                                                    ascending</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input id="priceDesc" type="radio" value="priceDesc"
+                                                    class="form-check-input" name="sorting">
+                                                <label for="priceDesc" class="form-check-label">Price
+                                                    descending</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <button id="btnFilter" class="btn btn-pill btn-primary">
+                                        <strong>Fill books</strong>
+                                    </button>
+
+
                                 </div>
                             </div>
                         </div>
                     </section>
 
-                    <section id="featured-books" class="py-5 my-5">
+                    <section id="featured-books" class="py-5 my-5" style="width: 80%;">
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-12">
@@ -99,7 +195,8 @@
                                             <nav aria-label="Page navigation example" class="mt-5">
                                                 <ul class="pagination justify-content-center">
                                                     <li class="page-item ${currentPage eq 1 ? 'disabled' : ''}">
-                                                        <a class="page-link" href="/books?page=${currentPage-1}"
+                                                        <a class="page-link"
+                                                            href="/books?page=${currentPage-1}${queryString}"
                                                             aria-label="Previous">
                                                             <span aria-hidden="true">&laquo;</span>
                                                         </a>
@@ -108,12 +205,13 @@
                                                         <li
                                                             class="page-item ${currentPage eq status.index ? 'active' : ''}">
                                                             <a class="page-link"
-                                                                href="/books?page=${status.index}">${status.index}</a>
+                                                                href="/books?page=${status.index}${queryString}">${status.index}</a>
                                                         </li>
                                                     </c:forEach>
                                                     <li
                                                         class="page-item ${currentPage eq totalPages ? 'disabled' : ''}">
-                                                        <a class="page-link" href="/books?page=${currentPage+1}"
+                                                        <a class="page-link"
+                                                            href="/books?page=${currentPage+1}${queryString}"
                                                             aria-label="Next">
                                                             <span aria-hidden="true">&raquo;</span>
                                                         </a>
@@ -130,6 +228,7 @@
 
                     <jsp:include page="../layout/footer.jsp" />
 
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
                     <script src="/client/js/jquery-1.11.0.min.js"></script>
                     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
                         integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"

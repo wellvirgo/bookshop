@@ -40,7 +40,6 @@ public class RegisterController {
         User user = this.userService.convertRegisterUserToUser(registerUser);
         String hashPassword = this.passwordEncoder.encode(registerUser.getPassword());
         Role role = this.userService.getRoleByName("USER");
-        // user.setEmail(registerUser.getEmail());
         user.setPassword(hashPassword);
         user.setRole(role);
 

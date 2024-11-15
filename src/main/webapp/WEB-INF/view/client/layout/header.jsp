@@ -94,11 +94,11 @@
                                     <a href="#pages" class="nav-link">Category</a>
 
                                     <ul>
-                                        <li><a href="index.html">Novel</a></li>
-                                        <li><a href="index.html">History</a></li>
-                                        <li><a href="index.html">Detective</a></li>
-                                        <li><a href="index.html">Science fiction</a></li>
-                                        <li><a href="index.html">Short story</a></li>
+                                        <li><a href="/books?category=TIEU_THUYET">Novel</a></li>
+                                        <li><a href="/books?category=LICH_SU">History</a></li>
+                                        <li><a href="/books?category=TRINH_THAM">Detective</a></li>
+                                        <li><a href="/books?category=KHOA-HOC_VIEN-TUONG">Science fiction</a></li>
+                                        <li><a href="/books?category=TRUYEN_NGAN">Short story</a></li>
                                     </ul>
 
                                 </li>

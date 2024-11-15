@@ -75,4 +75,8 @@ public class OrderService {
     public Order saveOrder(Order order) {
         return this.orderRepository.save(order);
     }
+
+    public long countOrders() {
+        return this.orderRepository.count();
+    }
 }
