@@ -1,5 +1,7 @@
 package vn.dangthehao.bookshop.repository;
 
+import java.util.Optional;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -20,4 +22,6 @@ public interface BookRepository extends JpaRepository<Book, Long>, JpaSpecificat
 
     @NonNull
     public Page<Book> findAll(@Nullable Specification<Book> specs, @NonNull Pageable pageable);
+
+    public Optional<Book> findTopByOrderByNumOfSalesDesc();
 }

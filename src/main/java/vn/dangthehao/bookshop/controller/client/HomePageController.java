@@ -1,6 +1,7 @@
 package vn.dangthehao.bookshop.controller.client;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +21,10 @@ public class HomePageController {
     @GetMapping("/")
     public String getHomePage(Model model) {
         List<Book> books = this.bookService.fetchBooks();
+        Optional<Book> bestSellingBookOptional = this.bookService.fetchBestSellingBook();
+        if (bestSellingBookOptional.isPresent()) {
+            model.addAttribute("bestSellingBook", bestSellingBookOptional.get());
+        }
         model.addAttribute("books", books);
         return "client/home";
     }

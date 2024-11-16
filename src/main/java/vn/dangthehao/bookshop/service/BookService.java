@@ -1,6 +1,7 @@
 package vn.dangthehao.bookshop.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -124,5 +125,16 @@ public class BookService {
 
     public long countBooks() {
         return this.bookRepository.count();
+    }
+
+    public void updateNumOfSales(long bookId, int orderedQuantity) {
+        Book book = this.fetchBookById(bookId);
+        int updateNumOfSales = book.getNumOfSales() + orderedQuantity;
+        book.setNumOfSales(updateNumOfSales);
+        this.saveBook(book);
+    }
+
+    public Optional<Book> fetchBestSellingBook() {
+        return this.bookRepository.findTopByOrderByNumOfSalesDesc();
     }
 }

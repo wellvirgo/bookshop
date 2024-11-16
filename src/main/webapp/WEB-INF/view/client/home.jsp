@@ -172,6 +172,54 @@
                     </div>
                 </section>
 
+                <!--Best selling book-->
+                <section id="best-selling" class="leaf-pattern-overlay">
+                    <div class="corner-pattern-overlay"></div>
+                    <div class="container">
+                        <div class="row justify-content-center">
+
+                            <div class="col-md-8">
+
+                                <div class="row">
+
+                                    <div class="col-md-6">
+                                        <figure class="products-thumb">
+                                            <img src="/images/bookImages/${bestSellingBook.getImageLink()}" alt="book"
+                                                class="single-image">
+                                        </figure>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="product-entry">
+                                            <h2 class="section-title divider">Best Selling Book</h2>
+
+                                            <div class="products-content">
+                                                <div class="author-name">Author: ${bestSellingBook.getAuthorName()}
+                                                </div>
+                                                <h3 class="item-title">${bestSellingBook.getName()}</h3>
+                                                <p>${bestSellingBook.getShortDesc()}.</p>
+                                                <div class="item-price">
+                                                    <fmt:formatNumber type="number"
+                                                        value="${bestSellingBook.getPrice()}" /> VND
+                                                </div>
+                                                <div class="btn-wrap">
+                                                    <a href="#" class="btn-accent-arrow">shop it now <i
+                                                            class="icon icon-ns-arrow-right"></i></a>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <!-- / row -->
+
+                            </div>
+
+                        </div>
+                    </div>
+                </section>
+
                 <jsp:include page="./layout/footer.jsp" />
 
                 <script src="/client/js/jquery-1.11.0.min.js"></script>

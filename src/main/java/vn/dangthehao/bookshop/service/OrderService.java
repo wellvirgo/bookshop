@@ -53,7 +53,10 @@ public class OrderService {
             orderDetail.setTotal(cartDetail.getTotal());
             orderDetail.setOrder(order);
             this.orderDetailService.saveOrderDetail(orderDetail);
+            // Update book quantity after ordered
             this.bookService.updateBookQuantityAfterOrder(cartDetail.getBook().getId(), cartDetail.getQuantity());
+            // Update num of sales after ordered
+            this.bookService.updateNumOfSales(cartDetail.getBook().getId(), cartDetail.getQuantity());
             this.cartDetailService.deleteCartDetail(cartDetail);
         }
         this.cartService.deleteCart(cart);

@@ -32,6 +32,7 @@ public class Book {
     private String authorName;
     private String category;
     private String imageLink;
+    private int numOfSales;
 
     @OneToMany(mappedBy = "book")
     private List<CartDetail> cartDetails;
@@ -120,6 +121,14 @@ public class Book {
 
     public void setImageLink(String imageLink) {
         this.imageLink = imageLink;
+    }
+
+    public int getNumOfSales() {
+        return numOfSales;
+    }
+
+    public void setNumOfSales(int numOfSales) {
+        this.numOfSales = numOfSales;
     }
 
 }
