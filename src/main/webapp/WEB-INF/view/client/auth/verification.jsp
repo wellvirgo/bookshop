@@ -5,7 +5,7 @@
         <head>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Login</title>
+            <title>Verification</title>
             <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
                 integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
                 crossorigin="anonymous">
@@ -33,6 +33,10 @@
                         height: 100%;
                     }
                 }
+
+                .invalid {
+                    color: red;
+                }
             </style>
         </head>
 
@@ -45,51 +49,45 @@
                                 class="img-fluid" alt="Sample image">
                         </div>
                         <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-                            <form method="post" action="/login">
+                            <form:form method="post" action="/login/forgot-password/verify"
+                                modelAttribute="forgotPasswordDTO">
                                 <div>
                                     <input class="form-control" type="hidden" name="${_csrf.parameterName}"
                                         value="${_csrf.token}" />
                                 </div>
+                                <div>
+                                    <form:input class="form-control" type="hidden" readonly="readonly" path="email" />
+                                </div>
+                                <div>
+                                    <form:input class="form-control" type="hidden" readonly="readonly"
+                                        path="password" />
+                                </div>
+                                <div>
+                                    <form:input class="form-control" type="hidden" readonly="readonly"
+                                        path="verificationCode" />
+                                </div>
+
                                 <div
                                     class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
-                                    <p class="lead fw-normal mb-0 me-3">Sign in with</p>
+                                    <p class="lead fw-normal mb-0 me-3">Input verification code</p>
                                 </div>
 
                                 <div class="divider d-flex align-items-center my-4">
                                 </div>
 
-                                <c:if test="${param.error!=null}">
-                                    <div class="my-2" style="color: red;"><strong>Invalid email or password</strong>
-                                    </div>
-                                </c:if>
-
-                                <!-- Email input -->
-                                <div data-mdb-input-init class="form-outline mb-4">
-                                    <label class="form-label" for="username">Email address</label>
-                                    <input type="email" id="username" name="username"
-                                        class="form-control form-control-lg"
-                                        placeholder="Enter a valid email address" />
-                                </div>
-
-                                <!-- Password input -->
                                 <div data-mdb-input-init class="form-outline mb-3">
-                                    <label class="form-label" for="password">Password</label>
-                                    <input type="password" id="password" name="password"
-                                        class="form-control form-control-lg" placeholder="Enter password" />
-                                </div>
-
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <a href="/login/forgot-password" class="text-body">Forgot password?</a>
+                                    <label class="form-label" for="confirmVerificationCode">Verification code</label>
+                                    <input type="password" id="confirmVerificationCode" name="confirmVerificationCode"
+                                        path="confirmVerificationCode" class="form-control form-control-lg"
+                                        placeholder="Input verification code" />
                                 </div>
 
                                 <div class="text-center text-lg-start mt-4 pt-2">
                                     <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-lg"
-                                        style="padding-left: 2.5rem; padding-right: 2.5rem; background-color: #7c6f44; color: white;">Login</button>
-
-                                    <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="/register"
-                                            class="link-danger">Register</a></p>
+                                        style="padding-left: 2.5rem; padding-right: 2.5rem; background-color: #7c6f44; color: white;">Confirm</button>
                                 </div>
-                            </form>
+                            </form:form>
+
                         </div>
                     </div>
                 </div>
