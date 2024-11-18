@@ -65,6 +65,9 @@
                             </div>
                             <form:form method="post" action="/account/update" modelAttribute="user"
                                 enctype="multipart/form-data">
+                                <c:set var="errorFullName">
+                                    <form:errors path="fullName" />
+                                </c:set>
                                 <div class="mb-3" style="display: none;">
                                     <form:input type="text" path="id" class="form-control" readonly="true" />
                                 </div>
@@ -79,6 +82,7 @@
                                 <div class="mb-3">
                                     <label for="fullName" class="form-label">Full name</label>
                                     <form:input id="fullName" type="text" path="fullName" class="form-control" />
+                                    <div style="color: red;">${errorFullName}</div>
                                 </div>
                                 <div class="mb-3">
                                     <label for="address" class="form-label">Address</label>

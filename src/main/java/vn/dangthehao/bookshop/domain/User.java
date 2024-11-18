@@ -11,6 +11,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "user")
@@ -20,6 +21,7 @@ public class User {
     private long id;
     private String email;
     private String password;
+    @NotBlank(message = "Full name must not blank")
     private String fullName;
     private String address;
     private String phone;

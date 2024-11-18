@@ -2,6 +2,7 @@ package vn.dangthehao.bookshop.controller.client;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import vn.dangthehao.bookshop.domain.User;
 import vn.dangthehao.bookshop.service.UploadFileService;
 import vn.dangthehao.bookshop.service.UserService;
@@ -34,8 +36,11 @@ public class AccountController {
     }
 
     @PostMapping("/account/update")
-    public String updateAccountInformation(@ModelAttribute("user") User user,
+    public String updateAccountInformation(@Valid @ModelAttribute("user") User user, BindingResult bindingResult,
             @RequestParam("avatarFile") MultipartFile file) {
+        if (bindingResult.hasErrors()) {
+            return "client/auth/account_management";
+        }
         User updateUser = this.userService.fetchUserById(user.getId());
         updateUser.setFullName(user.getFullName());
         updateUser.setAddress(user.getAddress());
