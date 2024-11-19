@@ -11,7 +11,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.validation.Valid;
 import vn.dangthehao.bookshop.domain.Book;
@@ -68,7 +67,7 @@ public class HomePageController {
 
         Random random = new Random();
         String encryptedPassword = passwordEncoder.encode(forgotPasswordDTO.getPassword());
-        String verificationCode = String.valueOf(random.nextInt(10000));
+        String verificationCode = String.valueOf(random.nextInt(1000, 10000));
         emailService.sendThankMessage(forgotPasswordDTO.getEmail(), "VERIFICATION CODE",
                 "Your verification code: " + verificationCode);
         forgotPasswordDTO.setPassword(encryptedPassword);

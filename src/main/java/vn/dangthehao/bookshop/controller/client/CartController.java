@@ -85,6 +85,23 @@ public class CartController {
     public String confirmCheckout(@ModelAttribute(name = "cart") Cart cart, Model model) {
         List<CartDetail> updatedCartDetails = cart.getCartDetails();
         Cart oldCart = this.cartService.fetchCartById(cart.getId());
+
+        /*
+         * Validate quantity in each cart detail
+         * If quantity <= available quantity book, it's passed
+         * Else it's failed
+         */
+        List<Boolean> failedQuantityCheck = updatedCartDetails.stream()
+                .map(updatedCartDetail -> cartDetailService.validateCartDetailQuantity(updatedCartDetail))
+                .filter(checkResult -> checkResult == false)
+                .toList();
+        if (!failedQuantityCheck.isEmpty()) {
+            model.addAttribute("cartDetails", oldCart.getCartDetails());
+            model.addAttribute("failedValidation", 1);
+            model.addAttribute("cartTotal", oldCart.getTotal());
+            return "client/cart/show";
+        }
+
         this.cartService.handleUpdateCartBeforeCheckOut(updatedCartDetails, oldCart);
         Cart updatedCart = this.cartService.fetchCartById(oldCart.getId());
         model.addAttribute("cartDetails", updatedCart.getCartDetails());

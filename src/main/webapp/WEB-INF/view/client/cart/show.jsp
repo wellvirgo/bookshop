@@ -42,6 +42,12 @@
                         .fixed-width-input {
                             width: 8ch;
                         }
+
+                        #row-quantity {
+                            display: flex;
+                            align-items: center;
+                            gap: 10px;
+                        }
                     </style>
 
                 </head>
@@ -75,6 +81,11 @@
 
                     <c:if test="${cart!=null}">
                         <div class="container">
+                            <c:if test="${failedValidation!=null}">
+                                <h3 style="color: #dca556; text-align: center;">Please select within the available
+                                    quantity of each book
+                                </h3>
+                            </c:if>
                             <table class="table">
                                 <thead>
                                     <tr>
@@ -99,10 +110,18 @@
                                                     <span>${cartDetail.getBook().getName()}</span>
                                                 </td>
                                                 <td>
-                                                    <input type="number" class="fixed-width-input"
-                                                        id="quantity${cartDetail.getId()}"
-                                                        value="${cartDetail.getQuantity()}"
-                                                        onchange="changeQuantity('${cartDetail.getId()}')" min="1">
+                                                    <div id="row-quantity">
+                                                        <div>
+                                                            <input type="number" class="fixed-width-input"
+                                                                id="quantity${cartDetail.getId()}"
+                                                                value="${cartDetail.getQuantity()}"
+                                                                onchange="changeQuantity('${cartDetail.getId()}')"
+                                                                min="1">
+                                                        </div>
+                                                        <h5 style="color: #dca556;">
+                                                            ${failedValidation!=null?cartDetail.getBook().getQuantity():""}
+                                                        </h5>
+                                                    </div>
                                                 </td>
                                                 <td>
                                                     <span id="price${cartDetail.getId()}">
@@ -186,6 +205,9 @@
                                                             path="cartDetails[${status.index}].quantity" />
                                                         <form:input type="text" id="totalToServer${cartDetail.getId()}"
                                                             path="cartDetails[${status.index}].total" />
+                                                        <form:input type="text" id="bookIdToServer${cartDetail.getId()}"
+                                                            path="cartDetails[${status.index}].book.id" />
+
                                                     </div>
                                                 </c:forEach>
                                                 <button
